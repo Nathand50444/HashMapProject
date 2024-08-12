@@ -1,4 +1,9 @@
 class HashMap
+
+  def initialize
+    @my_hash = {}
+  end
+
   def hash(key)
     hash_code = 0
     prime_number = 31
@@ -9,9 +14,8 @@ class HashMap
   end
 
   def set(key, value)
-    my_hash = {}
-    my_hash[key] = value
-    my_hash
+    @my_hash[key] = value
+    hash(key)
   end
 
   def get(key)
@@ -24,5 +28,8 @@ class HashMap
 
   def remove(key)
     # Find the 'key' entry, remove the entry with that key and return the deleted entry’s value.
+  end
+
+  def length
   end
 end
