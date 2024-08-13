@@ -1,6 +1,9 @@
+require_relative 'linked_list'
+
 class HashMap
 
   def initialize
+    @buckets = Array.new(16) {LinkedList.new}
     @my_hash = {}
   end
 
