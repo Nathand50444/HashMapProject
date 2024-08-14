@@ -4,7 +4,9 @@ class HashMap
 
   def initialize
     @buckets = Array.new(16) {LinkedList.new}
-    @my_hash = {}
+    @load_factor = 0.75
+    @hashmap_size = 16
+    @number_of_elements = 0
   end
 
   def hash(key)
@@ -17,8 +19,7 @@ class HashMap
   end
 
   def set(key, value)
-    @my_hash[key] = value
-    hash(key)
+
   end
 
   def get(key)
