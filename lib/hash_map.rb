@@ -19,7 +19,10 @@ class HashMap
   end
 
   def set(key, value)
+    bucket_index = hash(key) % @hashmap_size
 
+    @element_count += 1
+    @buckets[bucket_index].prepend(key, value)
   end
 
   def get(key)
@@ -35,5 +38,6 @@ class HashMap
   end
 
   def length
+    
   end
 end
