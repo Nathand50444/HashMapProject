@@ -21,7 +21,7 @@ class HashMap
   def set(key, value)
     bucket_index = hash(key) % @hashmap_size
 
-    @element_count += 1
+    @number_of_elements += 1
     @buckets[bucket_index].prepend(key, value)
   end
 
@@ -49,15 +49,27 @@ class HashMap
   end
 
   def clear
-  end 
+    @buckets = Array.new(16) { LinkedList.new }
+    @number_of_elements = 0
+    # Remove all entries in the hashmap.
+  end
 
   def keys
+    @buckets.flat_map do |bucket|
+      bucket.map { |node| node[:key] }
+    end
+    # Returns an array containing all the keys inside the hash map.
   end
 
   def values
-  end 
+    @buckets.flat_map do |bucket|
+      bucket.map { |node| node[:value] }
+    end
+  end
 
   def entries
+    @buckets.flat_map do |bucket|
+      bucket.map { |node| [node[:key], node[:value]] }
+    end
   end
-  
 end
