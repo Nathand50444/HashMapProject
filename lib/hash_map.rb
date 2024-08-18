@@ -26,18 +26,38 @@ class HashMap
   end
 
   def get(key)
+    bucket_index = hash(key) % @hashmap_size
+    pair = @buckets[bucket_index].find { |hash| hash[:key] == key }
+    pair ? pair[:value] : nil
     # This method will search the buckets for the corresponding key; value pair.
   end
 
   def has?(key)
+    bucket_index = hash(key) % @hashmap_size
+    !!@buckets[bucket_index].find { |hash| hash[:key] == key }
     # Search the buckets for the corresponding key; value pair, return TRUE if found.
   end
 
   def remove(key)
+    bucket_index = hash(key) % @hashmap_size
+    @buckets[bucket_index].delete_if { |hash| hash[:key] == key }
     # Find the 'key' entry, remove the entry with that key and return the deleted entry’s value.
   end
 
   def length
-    
+    print @element_count
   end
+
+  def clear
+  end 
+
+  def keys
+  end
+
+  def values
+  end 
+
+  def entries
+  end
+  
 end
