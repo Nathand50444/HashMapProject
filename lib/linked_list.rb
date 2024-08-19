@@ -1,4 +1,4 @@
-require_relative 'node.rb'
+require_relative 'node'
 
 class LinkedList
 
@@ -14,10 +14,11 @@ class LinkedList
   def prepend(key, value)
     @size += 1
     @list = Node.new(key, value)
+    to_string
   end
 
   def to_string
-    puts @list * " -> "
+    puts @list
   end
 
 end
