@@ -20,32 +20,44 @@ class HashMap
 
   def set(key, value)
     bucket_index = hash(key) % @hashmap_size
-
-    @number_of_elements += 1
-    @buckets[bucket_index].prepend(key, value)
+    bucket = @buckets[bucket_index]
+  
+    node = bucket.find { |node| node.key == key }
+    
+    if node
+      node.value = value
+    else
+      @number_of_elements += 1
+      bucket.prepend(key, value)
+    end
   end
 
   def get(key)
     bucket_index = hash(key) % @hashmap_size
-    pair = @buckets[bucket_index].find { |hash| hash[:key] == key }
-    pair ? pair[:value] : nil
+    pair = @buckets[bucket_index].find { |hash| hash.key == key }
+    pair ? pair.value : nil
     # This method will search the buckets for the corresponding key; value pair.
   end
 
   def has?(key)
     bucket_index = hash(key) % @hashmap_size
-    !!@buckets[bucket_index].find { |hash| hash[:key] == key }
+    !!@buckets[bucket_index].find { |hash| hash.key == key }
     # Search the buckets for the corresponding key; value pair, return TRUE if found.
   end
 
   def remove(key)
     bucket_index = hash(key) % @hashmap_size
-    @buckets[bucket_index].delete_if { |hash| hash[:key] == key }
-    # Find the 'key' entry, remove the entry with that key and return the deleted entry’s value.
+    node = @buckets[bucket_index].find { |node| node.key == key }
+    if node
+      @buckets[bucket_index].delete_if { |n| n.key == key }
+      node.value
+    else
+      nil
+    end
   end
 
   def length
-    print @element_count
+    puts @number_of_elements
   end
 
   def clear
@@ -72,4 +84,10 @@ class HashMap
       bucket.map { |node| [node.key, node.value] }
     end
   end
+
+  def tallies
+    @hashmap_size
+    @number_of_elements
+  end
+
 end

@@ -5,17 +5,14 @@ class LinkedList
   include Enumerable
 
   # Initialize creates the @list class instance variable and populates it with "nil" for the last value in the list.
-  def initialize(head = nil, tail = nil)
-    @head = head
-    @tail = tail
-    @size = 0
+  def initialize
+    @head = nil
   end
 
   # Adds word to the beginning of the list.
   def prepend(key, value)
     new_node = Node.new(key, value)
-    @size += 1
-    to_string
+
     if @head.nil?
       @head = new_node
       @tail = new_node
@@ -41,5 +38,32 @@ class LinkedList
     result = []
     each { |node| result << yield(node) }
     result
+  end
+
+  # Find method to locate a node by a condition
+  def find
+    each do |node|
+      return node if yield(node)
+    end
+    nil
+  end
+  
+  # Deletes nodes based on a condition
+  def delete_if
+    prev = nil
+    current = @head
+  
+    while current
+      if yield(current)
+        if prev
+          prev.next = current.next
+        else
+          @head = current.next
+        end
+      else
+        prev = current
+      end
+      current = current.next
+    end
   end
 end
