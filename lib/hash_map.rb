@@ -56,20 +56,20 @@ class HashMap
 
   def keys
     @buckets.flat_map do |bucket|
-      bucket.map { |node| node[:key] }
+      bucket.map(&:key)
     end
     # Returns an array containing all the keys inside the hash map.
   end
 
   def values
     @buckets.flat_map do |bucket|
-      bucket.map { |node| node[:value] }
+      bucket.map { |node| node.value }
     end
   end
 
   def entries
     @buckets.flat_map do |bucket|
-      bucket.map { |node| [node[:key], node[:value]] }
+      bucket.map { |node| [node.key, node.value] }
     end
   end
 end
