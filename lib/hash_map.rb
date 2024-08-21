@@ -19,7 +19,9 @@ class HashMap
   end
 
   def set(key, value)
+
     bucket_index = hash(key) % @hashmap_size
+    puts bucket_index
     bucket = @buckets[bucket_index]
   
     node = bucket.find { |node| node.key == key }
@@ -28,6 +30,7 @@ class HashMap
       node.value = value
     else
       @number_of_elements += 1
+      resize_required?
       bucket.prepend(key, value)
     end
   end
@@ -57,7 +60,8 @@ class HashMap
   end
 
   def length
-    puts @number_of_elements
+    puts "@number_of_elements = #{@number_of_elements}"
+    puts "@hashmap_size = #{@hashmap_size}"
   end
 
   def clear
@@ -85,9 +89,24 @@ class HashMap
     end
   end
 
-  def tallies
-    @hashmap_size
-    @number_of_elements
+  def resize_required?
+    current_load_factor = @number_of_elements.to_f / @hashmap_size
+
+    if current_load_factor > @load_factor
+      rehash
+    end
   end
 
+  def rehash
+    old_buckets = @buckets
+    @hashmap_size *= 2
+    @buckets = Array.new(@hashmap_size) {LinkedList.new}
+    @number_of_elements = 0
+
+    old_buckets.each do |bucket|
+      bucket.each do |node|
+        set(node.key, node.value)
+      end
+    end
+  end
 end
