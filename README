@@ -1,0 +1,14 @@
+# Basic Hash Map
+
+This basic implementation of a hash map data structure in Ruby stores key-value pairs and allows for efficient lookup, insertion, and deletion of elements. I believe this program demonstrates my skills in fundamental programming and showcases my ability to design and implement complex data structures.
+
+## Example Methods
+
+* `set(key, value)`: Inserts a new key-value pair into the hash map.
+* `get(key)`: Retrieves the value associated with a given key.
+* `remove(key)`: Removes a key-value pair from the hash map.
+* `resize`: Dynamically resizes the hash map to maintain optimal performance.
+
+## main.rb
+
+Demonstrates how the hash map can be used and manipulated for most methods.
