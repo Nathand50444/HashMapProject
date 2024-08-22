@@ -18,6 +18,8 @@ test.set('kite', 'pink') # bucket 15
 test.set('lion', 'golden') # COLLISION bucket 12
 test.set('elephant', 'blue') # OVERWRITE bucket 1
 p test.entries
+test.to_string(11)
+test.to_string(12)
 
 p test.length
 

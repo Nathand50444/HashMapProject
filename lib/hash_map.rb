@@ -2,6 +2,8 @@ require_relative 'linked_list'
 
 class HashMap
 
+
+
   def initialize
     # class variables are initialized including the buckets (allows us to store our linked lists of elements)
     # load_factor sets the rate new buckets will be formed. def resize_required? updates buckets when 75% used)
@@ -66,6 +68,15 @@ class HashMap
     else
       nil
     end
+  end
+
+  def to_string(bucket_index)
+    if bucket_index < 0 || bucket_index >= @hashmap_size
+      puts "Bucket index out of range."
+      return
+    end
+
+    @buckets[bucket_index].to_string
   end
 
   def length
